@@ -10,14 +10,14 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.post('/summarize', (req, res) => {
-  const text = req.body.text;  //get text from request body
+  const text = req.body.text_to_summarize;  //get text from request body
 
-  summarizeText(text);  //call function passing in text
+  summarizeText(text)  //call function passing in text
     .then(response => {
       res.send(response);  // Send the summary text as a response to the client
     })
     .catch(error => {
-      console.log(error.messaged);
+      console.log(error.message);
     });
 });
 
