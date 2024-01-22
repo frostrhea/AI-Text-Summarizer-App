@@ -4,6 +4,10 @@ const submitButton = document.getElementById("submit-button");
 
 const summarizedTextArea = document.getElementById("summary");
 
+min_length = document.getElementById("min-length").value;
+max_length = document.getElementById("max-length").value;
+
+
 submitButton.disabled = true;
 
 textArea.addEventListener("input", verifyTextLength);
@@ -28,8 +32,17 @@ function submitData(e) {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
+  myHeaders.append("Authorization", "Bearer " + process.env['ACCESS_TOKEN']);
+
+  //const minLength = min_length.value;
+  //const maxLength = max_length.value;
+
   var raw = JSON.stringify({
-    "text_to_summarize": text_to_summarize
+    "text_to_summarize": text_to_summarize,
+    "parameters": {
+      "max_length": max_length,
+      "min_length": min_length
+    }
   });
 
   var requestOptions = {

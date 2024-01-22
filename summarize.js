@@ -1,15 +1,18 @@
 const axios = require('axios');
-
 // This is the function where the call to the API is made. Returns the summarized text as a string.
-async function summarizeText(text) {
 
-  let data = JSON.stringify({
+
+async function summarizeText(text, min_length, max_length) {
+  console.log(min_length);
+  let data = {
     "inputs": text,
     "parameters": {
-      "max_length": 100,
-      "min_length": 30
+      "max_length": max_length,
+      "min_length": min_length
     }
-  });
+  };
+
+  //  FIX PASSING SUMMARY LENGTH VALUES -------------------------------------
 
   // A config object that will contain the instructions for the API call
   let config = {
